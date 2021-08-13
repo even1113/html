@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+  .box{
+    background-color: thistle;
+    color: #fff;
+    margin: 0 auto;
+    width: 300px;
+    padding-left: 90px;
+    padding-bottom: 30px;
+    padding-bottom: 30px;
+  }
+  input{
+    width: 200px;
+    height: 40px;
+    margin: 10px auto;
+    outline: none;
+    border: 0;
+    border:2px solid slateblue;
+  }
+  h2{
+    padding-left: 25px;
+  }
+  input:focus{
+    border: 4px solid cornflowerblue;
+  }
+  .imsg{
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+  }
+</style>
+<body>
+<div class="box">
+  <h2>小张的表单^3^</h2>
+  <input type="text" id="color" placeholder="color" onblur="checkColor()"><span class="imsg" id="colorInfo"></span>
+  <input type="text" id="url" placeholder="url" onblur="checkUrl()"><span class="imsg" id="urlInfo"></span>
+  <input type="text" id="chi" placeholder="chinese" onblur="checkChinese()"><span class="imsg"  id="chiInfo"></span>
+  <input type="submit" value="提交">
+</div>
+</body>
+<script>
+var color = document.getElementById('color');
+var url = document.getElementById('url');
+var chi = document.getElementById('chi');
+var colorInfo = document.getElementById('colorInfo');
+var urlInfo = document.getElementById('urlInfo');
+var chiInfo = document.getElementById('chiInfo');
+
+//RGB Hex颜色正则
+function checkColor() {
+       var Pattern = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/;
+       if(Pattern.test(color.value)) {
+         colorInfo.innerHTML = '对啦！';
+         colorInfo.style.color = 'green';
+         return true;
+       }else{
+         colorInfo.innerHTML = '错啦！';
+         colorInfo.style.color = 'red';
+         return false;
+       }
+    }
+
+
+function checkUrl() {
+//URL正则
+      var urlP = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+      if(urlP.test(url.value)) {
+        urlInfo.innerHTML = '对啦！';
+        urlInfo.style.color = 'green';
+        return true;
+      }else{
+        urlInfo.innerHTML = '错啦！';
+        urlInfo.style.color = 'red';
+        return false;
+      }
+    }
+
+function checkChinese(){
+        var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+        if(reg.test(chi.value)) {
+          chiInfo.innerHTML = '包含中文';
+          chiInfo.style.color = 'green';
+          return true;
+        }else{
+          chiInfo.innerHTML = '不包含中文';
+          chiInfo.style.color = 'red';
+          return false;
+        }
+      }
+</script>
+</html>
