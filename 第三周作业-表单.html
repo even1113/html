@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js表单</title>
+</head>
+<style>
+    .box{
+            margin:0 auto;
+            width: 400px;
+            padding:40px;
+            text-align: center;
+            background-color: seashell;
+    }
+    button{
+            position:absolute;
+            left: 60px;
+            top: 320px;
+    }
+    .box input{
+            outline: none;
+            border: 0;
+            background: none;
+            display: block;
+            margin:20px auto;
+            text-align: center;
+            border: 2px solid #cccccc;
+            padding: 14px 10px;
+            width: 200px;
+            border-radius: 24px;
+    }
+    input:focus{
+            width: 240px;
+            border-color: #6699cc;
+    }
+    .imsg{
+            font-size: 12px;
+            color:rgba(143,134,134,0.61);
+    }
+
+</style>
+<body>
+<div class="box" >
+        <h2>创建账户</h2>
+        <input type="text" id="user" placeholder="请输入用户名" onblur="checkUserName()"><span class="imsg" id="userInfo"></span>
+        <input type="password"  id="pwd" placeholder="请输入密码" onclick="checkPassWord()"><span class="imsg" id="pwdInfo"></span>
+        <input type="password" id="con" placeholder="请确认密码" onclick="checkConfirm()"><span class="imsg" id="conInfo"></span>
+        <input type="text" id="tel" placeholder="请输入手机号码" onclick="checkTelPhone()"><span class="imsg" id="telInfo"></span>
+        <input type="submit" id="sub" value="register">
+</div>
+<script>
+        //获取用户名，密码，确认密码，手机号码输入框
+        var user = document.getElementById('user');
+        var pwd = document.getElementById('pwd');
+        var con = document.getElementById('con');
+        var tel = document.getElementById('tel');
+
+    //获取后面的提示信息
+        var userInfo = document.getElementById('userInfo');
+        var pwdInfo = document.getElementById('pwdInfo');
+        var conInfo = document.getElementById('conInfo');
+        var telInfo = document.getElementById('telInfo');
+
+        //声明一个对象把对应的方法都保存到里面
+
+                //用户名验证
+                function checkUserName(){
+                        var pattern =/^[a-zA-Z0-9_-]{4,16}$/;
+                        console.log(user);
+                        if(user.value.length == 0){
+                                userInfo.innerHTML = '用户名不能为空';
+                                userInfo.style.color = 'red';
+                                return false;
+                        }
+                        if(pattern.test(user.value)){
+                                userInfo.innerHTML = '用户名不合法';
+                                userInfo.style.color = 'red';
+                                return false;
+                        }else{
+                                userInfo.innerHTML = '用户名合法';
+                                userInfo.style.color = 'green';
+                                return true;
+                        }
+                }
+                //密码验证
+                function checkPassWord (){
+                        var pattern =/^1[012345]{2}[6789]{3}[a-dA-D]{2}$/;
+                        if(pwd.value.length == 0){
+                                pwdInfo.innerHTML = '密码不能为空';
+                                pwdInfo.style.color = 'red';
+                                return false;
+                        }
+                        if(pattern.test(pwd.value)){
+                                pwdInfo.innerHTML = '密码不合法';
+                                pwdInfo.style.color = 'red';
+                                return false;
+                        }else{
+                                pwdInfo.innerHTML = '密码合法';
+                                pwdInfo.style.color = 'green';
+                                return true;
+                        }
+
+                }
+                function checkConfirm() {
+                        //确认密码
+                        if(pwd.value == con.value){
+                                conInfo.innerHTML = '密码一致';
+                                conInfo.style.color = 'green';
+                        }else{
+                                conInfo.innerHTML = '密码不一致';
+                                conInfo.style.color = 'red';
+                        }
+                }
+               function checkTelPhone (){
+                        //手机号码验证
+                        var pattern = /^1[3456789]\d{9}$/;
+                        if(tel.value.length == 0){
+                                telInfo.innerHTML = '手机号码不能为空';
+                                telInfo.style.color = 'red';
+                                return false;
+                        }
+                        if(pattern.test(tel.value)){
+                                telInfo.innerHTML = '手机号码不合法';
+                                telInfo.style.color = 'red';
+                                return false;
+                        }else{
+                                telInfo.innerHTML = '手机号码合法';
+                                telInfo.style.color = 'green';
+                                return true;
+                        }
+
+                }
+</script>
+</body>
+</html>
